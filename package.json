@@ -1,7 +1,16 @@
 {
-  "name": "LearnGraphql",
+  "name": "learngraphql",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Aqshola <aqsholafid2@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "client": "yarn workspace client",
+    "server": "yarn workspace server"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ]
 }
