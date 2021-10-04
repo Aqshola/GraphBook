@@ -1,57 +1,48 @@
 import React, { useState } from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import './App.css'
 
-import SearchBar from './components/Input/SearchBar'
-
 function App() {
-  const defaultSuggest = ['foo lalaaa', 'bar lalala', 'foo fighter', 'lalatina']
-  const [valueSearch, setvalueSearch] = useState('')
-  const [suggestArray, setsuggestArray] = useState<string[]>(defaultSuggest)
-  const [suggestView, setsuggestView] = useState(false)
-
-
-
-  const onChange = (e: any) => {
-    setvalueSearch(e.target.value)
-
-    if (e.target.value.length >= 3) {
-      setsuggestArray(suggestArray.filter((e) => e.includes(valueSearch)))
-      setsuggestView(true)
-
-      console.log('lala', suggestView, suggestArray)
-    }
-
-    if (e.target.value.length < 3) {
-      setsuggestView(false)
-      setsuggestArray(defaultSuggest)
-    }
-
-    if (valueSearch.trim() === "") {
-      setsuggestView(false)
-      setsuggestArray(defaultSuggest)
-    }
-
-  }
-
-  const suggestEvent = (event: any, data: any) => {
-    setvalueSearch(data)
-    setsuggestView(false)
-    setsuggestArray(defaultSuggest)
-  }
-
   return (
     <div className="App">
-      <div className="max-w-screen-sm mx-auto mt-10 flex justify-center">
-        <SearchBar
-          placeholder="Searchbar Demo"
-          onChange={onChange}
-          value={valueSearch}
-          suggestData={suggestArray}
-          suggestView={suggestView}
-          suggestEvent={suggestEvent}
-        />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <h1>Homepage</h1>
+          </Route>
+          <Route exact path="/author">
+            <h1>Author</h1>
+          </Route>
+          <Route exact path="/author/:slug_author">
+            <h1>Author Detail</h1>
+          </Route>
+          <Route exact path="/genre">
+            <h1>Genre</h1>
+          </Route>
+          <Route exact path="/genre/:genre">
+            <h1>Genre Detail</h1>
+          </Route>
+          <Route exact path="/genre/:genre">
+            <h1>Genre Detail</h1>
+          </Route>
+          <Route exact path="/book">
+            <h1>Book</h1>
+          </Route>
+          <Route exact path="/book/:slug_book">
+            <h1>Book Detail</h1>
+          </Route>
+          <Route exact path="/input/book">
+            <h1>Input Book</h1>
+          </Route>
+          <Route exact path="/input/author">
+            <h1>Input Author</h1>
+          </Route>
+          <Route exact path="/input/genre">
+            <h1>Input Genre</h1>
+          </Route>
+        </Switch>
+      </Router>
     </div>
   )
 }
