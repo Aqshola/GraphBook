@@ -2,7 +2,7 @@ import { ReactElement, useState } from 'react'
 import clsx from 'clsx'
 
 interface Props {
-  className: string
+  className?: string
 }
 
 export default function Nav({ ...props }: Props): ReactElement {
