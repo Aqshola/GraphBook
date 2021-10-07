@@ -15,6 +15,7 @@ export default function SearchBar({
   suggestView,
   suggestData,
   suggestEvent,
+  className,
   ...props
 }: Props): ReactElement {
   return (
@@ -33,7 +34,8 @@ export default function SearchBar({
         <input
           type="text"
           className={clsx(
-            'transition-all text-purple-600 visible w-56 p-2 focus:outline-none border-0 outline-none font-semibold'
+            'focus:outline-none border-0 outline-none text-purple-600 font-semibold',
+            className
           )}
           {...props}
         />

@@ -5,10 +5,14 @@ module.exports = {
     extend: {
       transitionProperty: {
         height: 'height',
+        maxHeight: 'max-height',
       },
     },
     fontFamily: {
       poppins: ['"Inter"', 'sans-serif'],
+    },
+    screens: {
+      xs: '480px',
     },
   },
   variants: {

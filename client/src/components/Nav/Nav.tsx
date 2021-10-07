@@ -16,7 +16,7 @@ export default function Nav({ ...props }: Props): ReactElement {
       )}
     >
       <div className="flex items-center p-2 box-border">
-        <h1 className="flex-grow font-bold text-white">GraphBook</h1>
+        <h1 className="font-bold text-white flex-grow text-left">GraphBook</h1>
 
         <button onClick={() => setdisplayLink(!displayLink)}>
           <svg

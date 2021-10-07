@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Homepage from './pages/Homepage'
 
 import './App.css'
 
@@ -9,7 +10,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/">
-            <h1>Homepage</h1>
+            <Homepage />
           </Route>
           <Route exact path="/author">
             <h1>Author</h1>
