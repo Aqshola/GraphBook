@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 import Homepage from './pages/Homepage'
+import Author from './pages/Author'
 
 import './App.css'
 import Nav from './components/Nav/Nav'
@@ -11,14 +13,14 @@ function App() {
     <div className="App">
       <Router>
         <Nav />
-        <div className="w-screen max-w-screen-xs relative mx-auto border-2">
+        <div className="w-screen box-border max-w-screen-xs relative mx-auto">
           <Fab />
           <Switch>
             <Route exact path="/">
               <Homepage />
             </Route>
             <Route exact path="/author">
-              <h1>Author</h1>
+              <Author />
             </Route>
             <Route exact path="/author/:slug_author">
               <h1>Author Detail</h1>
