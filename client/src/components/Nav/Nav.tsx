@@ -1,5 +1,6 @@
 import { ReactElement, useState } from 'react'
 import clsx from 'clsx'
+import { Link } from 'react-router-dom'
 
 interface Props {
   className?: string
@@ -11,11 +12,11 @@ export default function Nav({ ...props }: Props): ReactElement {
   return (
     <nav
       className={clsx(
-        'bg-purple-600 box-border transition-all h-auto',
+        'bg-purple-600 box-border transition-all h-auto max-w-screen-xs mx-auto md:max-w-screen-md',
         props.className
       )}
     >
-      <div className="flex items-center p-2 box-border">
+      <div className="flex items-center p-2 box-border ">
         <h1 className="font-bold text-white flex-grow text-left">GraphBook</h1>
 
         <button onClick={() => setdisplayLink(!displayLink)}>
@@ -46,15 +47,21 @@ export default function Nav({ ...props }: Props): ReactElement {
           !displayLink && ['h-0 overflow-hidden invisible opacity-0']
         )}
       >
-        <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
-          Book List
-        </li>
-        <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
-          Author List
-        </li>
-        <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
-          Genre List
-        </li>
+        <Link to="/">
+          <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
+            Book List
+          </li>
+        </Link>
+        <Link to="/author">
+          <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
+            Author List
+          </li>
+        </Link>
+        <Link to="/genre">
+          <li className="hover:bg-purple-400 p-2 text-sm transition-all font-semibold rounded-sm cursor-pointer">
+            Genre List
+          </li>
+        </Link>
       </ul>
     </nav>
   )

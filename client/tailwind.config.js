@@ -7,12 +7,12 @@ module.exports = {
         height: 'height',
         maxHeight: 'max-height',
       },
+      screens: {
+        xs: '480px',
+      },
     },
     fontFamily: {
       poppins: ['"Inter"', 'sans-serif'],
-    },
-    screens: {
-      xs: '480px',
     },
   },
   variants: {
