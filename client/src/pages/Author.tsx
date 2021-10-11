@@ -11,7 +11,7 @@ export default function Author({}: Props): ReactElement {
         Author List
       </h1>
 
-      <ListContainer className="text-left mt-10 w-full">
+      <ListContainer className="text-left mt-10 w-full p-2 md:p-0">
         <Link to="author/aqshol-afid">
           <List className="mb-5 ">Aqshol Afid</List>
         </Link>

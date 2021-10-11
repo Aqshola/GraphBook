@@ -26,11 +26,6 @@ export default function Fab({}: Props): ReactElement {
             Input Author
           </li>
         </Link>
-        <Link to="input/genre">
-          <li className="text-sm text-purple-600 hover:text-white hover:bg-purple-600 p-2">
-            Input Genre
-          </li>
-        </Link>
       </ul>
       <button
         className="p-2 bg-purple-600 rounded-full shadow-md"

@@ -6,7 +6,7 @@ interface Props {}
 
 export default function InputAuthor({}: Props): ReactElement {
   return (
-    <div>
+    <div className="p-2 md:p-0">
       <h1 className="text-purple-600 text-xl font-bold my-5">Input Author</h1>
       <div className="space-y-3">
         <InputBar placeholder="Name" className="w-full" />

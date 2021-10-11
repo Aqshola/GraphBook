@@ -14,13 +14,13 @@ export default function Genre({}: Props): ReactElement {
         Genre List
       </h1>
 
-      <div className="mt-10  flex ">
+      <div className="mt-10  flex p-2 md:p-0">
         <InputBar placeholder="Add Genre" />
-        <Button Btnsize="sm" className="text-sm ml-4">
+        <Button Btnsize="sm" className="text-xs ml-4">
           Add Genre
         </Button>
       </div>
-      <ListContainer className="text-left mt-3 w-full">
+      <ListContainer className="text-left mt-3 w-full p-2 md:p-0">
         <GenreListInteractive />
       </ListContainer>
     </>

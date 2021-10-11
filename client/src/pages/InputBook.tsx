@@ -43,6 +43,10 @@ export default function InputBook({}: Props): ReactElement {
             defaultValue={'Book Description'}
           ></textarea>
         </div>
+        <div className="flex p-2 space-x-2">
+          <Button>Save</Button>
+          <Button variant="outline-primary"> Cancel</Button>
+        </div>
       </div>
     </div>
   )
