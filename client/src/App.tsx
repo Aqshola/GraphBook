@@ -8,6 +8,8 @@ import Genre from './pages/Genre'
 import './App.css'
 import Nav from './components/Nav/Nav'
 import Fab from './components/Button/Fab'
+import InputAuthor from './pages/InputAuthor'
+import InputBook from './pages/InputBook'
 
 function App() {
   return (
@@ -42,13 +44,10 @@ function App() {
               <h1>Book Detail</h1>
             </Route>
             <Route exact path="/input/book">
-              <h1>Input Book</h1>
+              <InputBook />
             </Route>
             <Route exact path="/input/author">
-              <h1>Input Author</h1>
-            </Route>
-            <Route exact path="/input/genre">
-              <h1>Input Genre</h1>
+              <InputAuthor />
             </Route>
           </Switch>
         </div>
