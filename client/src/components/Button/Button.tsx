@@ -14,13 +14,15 @@ interface BtnProps extends React.HTMLProps<HTMLButtonElement> {
 export default function Button({
   Btnsize = 'md',
   variant = 'primary',
+  className,
+  type,
   ...props
 }: BtnProps) {
   return (
     <button
       className={clsx(
         'rounded hover:bg-opacity-60 transition-all  font-medium',
-        props.className,
+        className,
         Btnsize === 'sm' && ['px-3 py-1.5'],
         Btnsize === 'md' && ['px-5 py-2.5 '],
         Btnsize === 'lg' && ['py-3 px-8'],
@@ -34,6 +36,8 @@ export default function Button({
         ],
         variant === 'base' && ['border-black text-black font-normal']
       )}
+      type="button"
+      {...props}
     >
       {props.children}
     </button>

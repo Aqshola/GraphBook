@@ -12,6 +12,7 @@ export default function InputBar({
   suggestData,
   suggestEvent,
   suggestView = false,
+  className,
   ...props
 }: Props): ReactElement {
   return (
@@ -19,7 +20,8 @@ export default function InputBar({
       <input
         {...props}
         className={clsx(
-          'transition-all   focus:outline-none outline-none border-0'
+          'transition-all   focus:outline-none outline-none border-0',
+          className
         )}
       />
 

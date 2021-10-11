@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { Link } from 'react-router-dom'
+import { List, ListContainer } from '../components/List/List.'
 
 interface Props {}
 
@@ -10,19 +11,14 @@ export default function Author({}: Props): ReactElement {
         Author List
       </h1>
 
-      <ul className="list-disc list-inside text-left mt-3">
+      <ListContainer className="text-left mt-10 w-full">
         <Link to="author/aqshol-afid">
-          <li className="font-medium cursor-pointer  hover:text-purple-600">
-            Aqshol Afid
-          </li>
+          <List className="mb-5 ">Aqshol Afid</List>
         </Link>
-
         <Link to="author/james-bond">
-          <li className="font-medium cursor-pointer  hover:text-purple-600">
-            James Bond
-          </li>
+          <List>James Bond</List>
         </Link>
-      </ul>
+      </ListContainer>
     </>
   )
 }

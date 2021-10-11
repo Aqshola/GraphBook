@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Homepage from './pages/Homepage'
 import Author from './pages/Author'
+import Genre from './pages/Genre'
 
 import './App.css'
 import Nav from './components/Nav/Nav'
@@ -26,7 +27,7 @@ function App() {
               <h1>Author Detail</h1>
             </Route>
             <Route exact path="/genre">
-              <h1>Genre</h1>
+              <Genre />
             </Route>
             <Route exact path="/genre/:genre">
               <h1>Genre Detail</h1>
