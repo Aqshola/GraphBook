@@ -1,6 +1,7 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
+import useOutsideAlerter from '../../hooks/useOutside'
 
 interface Props {
   className?: string
@@ -8,9 +9,15 @@ interface Props {
 
 export default function Nav({ ...props }: Props): ReactElement {
   const [displayLink, setdisplayLink] = useState<boolean>(false)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  useOutsideAlerter({
+    ref: wrapperRef,
+    action: () => setdisplayLink(false),
+  })
 
   return (
     <nav
+      ref={wrapperRef}
       className={clsx(
         'bg-purple-600 box-border transition-all h-auto max-w-screen-xs mx-auto md:max-w-screen-md',
         props.className

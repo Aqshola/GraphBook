@@ -37,10 +37,9 @@ export default function InputBook({}: Props): ReactElement {
         <div className="flex flex-col justify-start">
           <label className="text-left">Description</label>
           <textarea
-            className="border border-purple-600"
-            cols={30}
-            rows={10}
+            className="border border-purple-600 w-96"
             defaultValue={'Book Description'}
+            rows={10}
           ></textarea>
         </div>
         <div className="flex p-2 space-x-2">

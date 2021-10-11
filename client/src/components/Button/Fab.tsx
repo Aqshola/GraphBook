@@ -1,15 +1,22 @@
-import React, { ReactElement, useState } from 'react'
+import React, { ReactElement, useRef, useState } from 'react'
 import clsx from 'clsx'
 import { Link } from 'react-router-dom'
+import useOutsideAlerter from '../../hooks/useOutside'
 
 interface Props {}
 
 export default function Fab({}: Props): ReactElement {
   const [viewMenu, setviewMenu] = useState<boolean>(false)
+  const ref = useRef<HTMLUListElement>(null)
+  useOutsideAlerter({
+    ref: ref,
+    action: () => setviewMenu(false),
+  })
 
   return (
     <div className="fixed bottom-10 right-5 md:right-56 lg:right-96">
       <ul
+        ref={ref}
         className={clsx(
           'transition-all bg-white text-left shadow-md transform mb-5',
           viewMenu && ['opacity-100 translate-y-0 visible'],
@@ -27,6 +34,7 @@ export default function Fab({}: Props): ReactElement {
           </li>
         </Link>
       </ul>
+
       <button
         className="p-2 bg-purple-600 rounded-full shadow-md"
         onClick={() => setviewMenu(!viewMenu)}

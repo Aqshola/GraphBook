@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import Button from '../Button/Button'
 import clsx from 'clsx'
+import { Link, useHistory } from 'react-router-dom'
 
 interface Props {
   title: string
@@ -9,6 +10,7 @@ interface Props {
 }
 
 export default function BookCard({ className, ...props }: Props): ReactElement {
+  const history = useHistory()
   return (
     <div
       className={clsx(
@@ -16,12 +18,17 @@ export default function BookCard({ className, ...props }: Props): ReactElement {
         className
       )}
     >
-      <h1 className="font-semibold text-xl space-y-5 text-purple-600">
-        A Book of Wandering{' '}
-      </h1>
+      <Link to="/book/book-of-wandering">
+        <h1 className="font-semibold text-xl space-y-5 text-purple-600 w-max text-center">
+          A Book of Wandering{' '}
+        </h1>
+      </Link>
       <div className="flex space-x-2">
         {props.genre.map((genre, idx) => (
           <Button
+            onClick={() => {
+              history.push('/genre/action')
+            }}
             key={idx}
             role="link"
             Btnsize="sm"

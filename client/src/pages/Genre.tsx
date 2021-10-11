@@ -39,16 +39,23 @@ const GenreListInteractive = () => {
 
   return (
     <List className="mb-5 flex items-center justify-between">
-      <input
-        ref={inputRef}
-        defaultValue={'Action'}
-        readOnly={!editState}
-        className={clsx(
-          'font-medium outline-none w-40',
-          editState && ['border border-black']
-        )}
-        autoFocus={true}
-      />
+      {editState ? (
+        <input
+          ref={inputRef}
+          defaultValue={'Action'}
+          readOnly={!editState}
+          className={clsx(
+            'font-medium outline-none w-40',
+            editState && ['border border-black']
+          )}
+          autoFocus={true}
+        />
+      ) : (
+        <Link to="/genre/action">
+          <p className="font-medium outline-none w-40">Action</p>
+        </Link>
+      )}
+
       <div className="space-x-2 ml-2">
         <Button
           Btnsize="sm"

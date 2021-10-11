@@ -10,6 +10,8 @@ import Nav from './components/Nav/Nav'
 import Fab from './components/Button/Fab'
 import InputAuthor from './pages/InputAuthor'
 import InputBook from './pages/InputBook'
+import GenreDetail from './pages/GenreDetail'
+import AuthorDetail from './pages/AuthorDetail'
 
 function App() {
   return (
@@ -26,16 +28,13 @@ function App() {
               <Author />
             </Route>
             <Route exact path="/author/:slug_author">
-              <h1>Author Detail</h1>
+              <AuthorDetail />
             </Route>
             <Route exact path="/genre">
               <Genre />
             </Route>
             <Route exact path="/genre/:genre">
-              <h1>Genre Detail</h1>
-            </Route>
-            <Route exact path="/genre/:genre">
-              <h1>Genre Detail</h1>
+              <GenreDetail />
             </Route>
             <Route exact path="/book">
               <h1>Book</h1>
