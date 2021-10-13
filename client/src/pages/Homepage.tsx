@@ -1,11 +1,26 @@
 import React, { ReactElement } from 'react'
 import SearchBar from '../components/Input/SearchBar'
-
 import CardBook from '../components/BookCard/BookCard'
+import { gql, useQuery } from '@apollo/client'
 
 interface Props {}
 
 export default function Homepage({ ...props }: Props): ReactElement {
+  const getBookQuery = gql`
+    {
+      books {
+        title
+        genre {
+          name
+        }
+      }
+    }
+  `
+  const { loading, error, data } = useQuery(getBookQuery)
+  console.log(data)
+  console.log(loading)
+  console.log(error)
+
   return (
     <div className="min-h-screen ">
       <div className="mt-3 flex  justify-center ">

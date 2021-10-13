@@ -13,44 +13,53 @@ import InputBook from './pages/InputBook'
 import GenreDetail from './pages/GenreDetail'
 import AuthorDetail from './pages/AuthorDetail'
 
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+
 function App() {
+  const client = new ApolloClient({
+    uri: 'http://localhost:5000/graphql',
+    cache: new InMemoryCache(),
+  })
+
   return (
     <div className="App">
-      <Router>
-        <Nav />
-        <div className="w-screen box-border max-w-screen-xs relative mx-auto">
-          <Fab />
-          <Switch>
-            <Route exact path="/">
-              <Homepage />
-            </Route>
-            <Route exact path="/author">
-              <Author />
-            </Route>
-            <Route exact path="/author/:slug_author">
-              <AuthorDetail />
-            </Route>
-            <Route exact path="/genre">
-              <Genre />
-            </Route>
-            <Route exact path="/genre/:genre">
-              <GenreDetail />
-            </Route>
-            <Route exact path="/book">
-              <h1>Book</h1>
-            </Route>
-            <Route exact path="/book/:slug_book">
-              <h1>Book Detail</h1>
-            </Route>
-            <Route exact path="/input/book">
-              <InputBook />
-            </Route>
-            <Route exact path="/input/author">
-              <InputAuthor />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+      <ApolloProvider client={client}>
+        <Router>
+          <Nav />
+          <div className="w-screen box-border max-w-screen-xs relative mx-auto">
+            <Fab />
+            <Switch>
+              <Route exact path="/">
+                <Homepage />
+              </Route>
+              <Route exact path="/author">
+                <Author />
+              </Route>
+              <Route exact path="/author/:slug_author">
+                <AuthorDetail />
+              </Route>
+              <Route exact path="/genre">
+                <Genre />
+              </Route>
+              <Route exact path="/genre/:genre">
+                <GenreDetail />
+              </Route>
+              <Route exact path="/book">
+                <h1>Book</h1>
+              </Route>
+              <Route exact path="/book/:slug_book">
+                <h1>Book Detail</h1>
+              </Route>
+              <Route exact path="/input/book">
+                <InputBook />
+              </Route>
+              <Route exact path="/input/author">
+                <InputAuthor />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </ApolloProvider>
     </div>
   )
 }
