@@ -1,25 +1,16 @@
 import React, { ReactElement } from 'react'
 import SearchBar from '../components/Input/SearchBar'
 import CardBook from '../components/BookCard/BookCard'
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import { getAllBook } from '../apollo/glQuery'
+import { book } from '../types/ApiTypes'
 
-interface Props {}
+type Response = {
+  books: book[]
+}
 
-export default function Homepage({ ...props }: Props): ReactElement {
-  const getBookQuery = gql`
-    {
-      books {
-        title
-        genre {
-          name
-        }
-      }
-    }
-  `
-  const { loading, error, data } = useQuery(getBookQuery)
-  console.log(data)
-  console.log(loading)
-  console.log(error)
+export default function Homepage(): ReactElement {
+  const { loading, error, data } = useQuery<Response>(getAllBook)
 
   return (
     <div className="min-h-screen ">
@@ -27,21 +18,22 @@ export default function Homepage({ ...props }: Props): ReactElement {
         <SearchBar placeholder="Search Book" className="w-64" />
       </div>
       <div className="flex flex-col space-y-10 py-5 items-center mt-5 mx-auto px-5 w-screen max-w-screen-xs">
-        <CardBook
-          title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
-          className="w-full"
-        />
-        <CardBook
-          title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
-          className="w-full"
-        />
-        <CardBook
-          title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
-          className="w-full"
-        />
+        {loading && (
+          <h1 className="text-lg text-purple-600 font-medium">
+            Loading Book...
+          </h1>
+        )}
+
+        {data &&
+          !loading &&
+          data.books.map((book: book) => (
+            <CardBook
+              key={book.id}
+              title={book.title}
+              genre={book.genre.map((name) => name)}
+              className="w-full"
+            />
+          ))}
       </div>
     </div>
   )

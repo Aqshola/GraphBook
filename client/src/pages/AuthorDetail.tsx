@@ -17,17 +17,44 @@ export default function AuthorDetail({}: Props): ReactElement {
       <div className="flex flex-col space-y-10  items-center  mx-auto px-5 w-screen max-w-screen-xs">
         <CardBook
           title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
+          genre={[
+            {
+              id: '1',
+              name: 'Action',
+            },
+            {
+              id: '2',
+              name: 'Drama',
+            },
+          ]}
           className="w-full"
         />
         <CardBook
           title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
+          genre={[
+            {
+              id: '1',
+              name: 'Action',
+            },
+            {
+              id: '2',
+              name: 'Drama',
+            },
+          ]}
           className="w-full"
         />
         <CardBook
           title="The book of Wanderer"
-          genre={['Adventure', 'Drama']}
+          genre={[
+            {
+              id: '1',
+              name: 'Action',
+            },
+            {
+              id: '2',
+              name: 'Drama',
+            },
+          ]}
           className="w-full"
         />
       </div>

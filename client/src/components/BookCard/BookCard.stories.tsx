@@ -19,5 +19,14 @@ const Template: Story<ComponentProps<typeof BookCard>> = (args) => (
 export const Base = Template.bind({})
 Base.args = {
   title: 'The Book of Wandering',
-  genre: ['Action, Drama'],
+  genre: [
+    {
+      id: '1',
+      name: 'Action',
+    },
+    {
+      id: '2',
+      name: 'Drama',
+    },
+  ],
 }

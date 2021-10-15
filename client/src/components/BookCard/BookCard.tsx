@@ -2,10 +2,11 @@ import React, { ReactElement } from 'react'
 import Button from '../Button/Button'
 import clsx from 'clsx'
 import { Link, useHistory } from 'react-router-dom'
+import { genre } from '../../types/ApiTypes'
 
 interface Props {
   title: string
-  genre: string[]
+  genre: genre[]
   className?: string
 }
 
@@ -27,15 +28,15 @@ export default function BookCard({ className, ...props }: Props): ReactElement {
         {props.genre.map((genre, idx) => (
           <Button
             onClick={() => {
-              history.push('/genre/action')
+              history.push(`/genre/${genre.name}`)
             }}
-            key={idx}
+            key={genre.id}
             role="link"
             Btnsize="sm"
             variant="outline-primary"
-            className="text-sm hover:bg-purple-600 hover:text-white hover:bg-opacity-100"
+            className="text-sm hover:bg-purple-600 hover:text-white hover:bg-opacity-100 capitalize"
           >
-            {genre}
+            {genre.name}
           </Button>
         ))}
       </div>

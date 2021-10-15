@@ -4,10 +4,16 @@ import Button from '../components/Button/Button'
 import InputBar from '../components/Input/InputBar'
 import { List, ListContainer } from '../components/List/List.'
 import clsx from 'clsx'
+import { genre } from '../types/ApiTypes'
+import { useQuery } from '@apollo/client'
+import { getAllGenre } from '../apollo/glQuery'
 
-interface Props {}
+interface Response {
+  genres: genre[]
+}
 
-export default function Genre({}: Props): ReactElement {
+export default function Genre(): ReactElement {
+  const { loading, error, data } = useQuery<Response>(getAllGenre)
   return (
     <>
       <h1 className="mt-2 text-2xl text-purple-600 font-semibold">
@@ -21,13 +27,19 @@ export default function Genre({}: Props): ReactElement {
         </Button>
       </div>
       <ListContainer className="text-left mt-3 w-full p-2 md:p-0">
-        <GenreListInteractive />
+        {data?.genres.map((genre) => (
+          <GenreListInteractive name={genre.name} key={genre.id} />
+        ))}
       </ListContainer>
     </>
   )
 }
 
-const GenreListInteractive = () => {
+interface genreList {
+  name: string
+}
+
+const GenreListInteractive = ({ name }: genreList) => {
   const [editState, seteditState] = useState<boolean>(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
