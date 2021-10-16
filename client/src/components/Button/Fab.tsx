@@ -3,9 +3,7 @@ import clsx from 'clsx'
 import { Link } from 'react-router-dom'
 import useOutsideAlerter from '../../hooks/useOutside'
 
-interface Props {}
-
-export default function Fab({}: Props): ReactElement {
+export default function Fab(): ReactElement {
   const [viewMenu, setviewMenu] = useState<boolean>(false)
   const ref = useRef<HTMLUListElement>(null)
   useOutsideAlerter({

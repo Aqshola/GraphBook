@@ -2,9 +2,7 @@ import React, { ReactElement } from 'react'
 import Button from '../components/Button/Button'
 import InputBar from '../components/Input/InputBar'
 
-interface Props {}
-
-export default function InputBook({}: Props): ReactElement {
+export default function InputBook(): ReactElement {
   return (
     <div>
       <h1 className="text-purple-600 text-xl font-bold my-5">Input Book</h1>

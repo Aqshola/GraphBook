@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 interface Props {
   ref: any
   action?: () => void
@@ -19,5 +19,5 @@ export default function useOutsideAlerter({ ref, action }: Props) {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [ref])
+  }, [ref, action])
 }

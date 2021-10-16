@@ -1,6 +1,11 @@
 export type genre = {
   id: string
   name: string
+  slug?: string
+}
+
+export interface genreDetail extends genre {
+  books: book[]
 }
 
 export type book = {
@@ -8,6 +13,7 @@ export type book = {
   title: string
   genre: genre[]
   author?: author[]
+  slug: string
 }
 
 export type author = {
@@ -15,4 +21,5 @@ export type author = {
   name: string
   age: number
   books?: book[]
+  slug: string
 }

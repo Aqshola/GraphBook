@@ -9,6 +9,7 @@ export const getAllBook = gql`
         id
         name
       }
+      slug
     }
   }
 `
@@ -18,6 +19,7 @@ export const getAllAuthor = gql`
     authors {
       id
       name
+      slug
     }
   }
 `
@@ -27,6 +29,43 @@ export const getAllGenre = gql`
     genres {
       id
       name
+      slug
+    }
+  }
+`
+
+export const getAuthorSlug = gql`
+  query getAuthorSlug($slug_author: String) {
+    authorSlug(slug: $slug_author) {
+      age
+      id
+      name
+      books {
+        id
+        title
+        slug
+        genre {
+          name
+          id
+        }
+      }
+    }
+  }
+`
+export const getGenreName = gql`
+  query getGenreName($name: String) {
+    genreName(name: $name) {
+      id
+      name
+      books {
+        id
+        title
+        genre {
+          id
+          name
+        }
+        slug
+      }
     }
   }
 `

@@ -7,13 +7,14 @@ import clsx from 'clsx'
 import { genre } from '../types/ApiTypes'
 import { useQuery } from '@apollo/client'
 import { getAllGenre } from '../apollo/glQuery'
+import Loading from '../components/Utils/Loading'
 
 interface Response {
   genres: genre[]
 }
 
 export default function Genre(): ReactElement {
-  const { loading, error, data } = useQuery<Response>(getAllGenre)
+  const { data, loading } = useQuery<Response>(getAllGenre)
   return (
     <>
       <h1 className="mt-2 text-2xl text-purple-600 font-semibold">
@@ -26,6 +27,8 @@ export default function Genre(): ReactElement {
           Add Genre
         </Button>
       </div>
+
+      <Loading loading={loading} />
       <ListContainer className="text-left mt-3 w-full p-2 md:p-0">
         {data?.genres.map((genre) => (
           <GenreListInteractive name={genre.name} key={genre.id} />
