@@ -8,3 +8,21 @@ export const addGenreMutat = gql`
     }
   }
 `
+
+export const deleteGenreMutat = gql`
+  mutation DeleteGenreMutation($deleteGenreId: ID!) {
+    deleteGenre(id: $deleteGenreId) {
+      status
+      message
+    }
+  }
+`
+
+export const updateGenreMutat = gql`
+  mutation UpdateGenreMutation($updateGenreId: String!, $name: String!) {
+    updateGenre(id: $updateGenreId, name: $name) {
+      status
+      message
+    }
+  }
+`

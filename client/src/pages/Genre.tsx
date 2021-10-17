@@ -8,7 +8,11 @@ import { genre } from '../types/ApiTypes'
 import { useMutation, useQuery } from '@apollo/client'
 import { getAllGenre } from '../apollo/glQuery'
 import Loading from '../components/Utils/Loading'
-import { addGenreMutat } from '../apollo/glMutate'
+import {
+  addGenreMutat,
+  deleteGenreMutat,
+  updateGenreMutat,
+} from '../apollo/glMutate'
 
 interface Response {
   genres: genre[]
@@ -17,10 +21,7 @@ interface Response {
 export default function Genre(): ReactElement {
   const { data, loading } = useQuery<Response>(getAllGenre)
   const [inputVal, setinputVal] = useState<string>('')
-  const [
-    addGenre,
-    { data: MutateData, loading: MutateLoading, error: MutateError },
-  ] = useMutation(addGenreMutat, {
+  const [addGenre, { loading: MutateLoading }] = useMutation(addGenreMutat, {
     refetchQueries: [
       {
         query: getAllGenre,
@@ -38,6 +39,7 @@ export default function Genre(): ReactElement {
         name: inputVal,
       },
     })
+    setinputVal('')
   }
   return (
     <>
@@ -63,9 +65,13 @@ export default function Genre(): ReactElement {
       </form>
 
       <Loading loading={loading || MutateLoading} />
-      <ListContainer className="text-left mt-3 w-full p-2 md:p-0">
+      <ListContainer className="text-left mt-3 w-full p-2 md:p-0 mb-36">
         {data?.genres.map((genre) => (
-          <GenreListInteractive name={genre.name} key={genre.id} />
+          <GenreListInteractive
+            name={genre.name}
+            key={genre.id}
+            id={genre.id}
+          />
         ))}
       </ListContainer>
     </>
@@ -74,11 +80,48 @@ export default function Genre(): ReactElement {
 
 interface genreList {
   name: string
+  id?: string
 }
 
-const GenreListInteractive = ({ name }: genreList) => {
+const GenreListInteractive = ({ name, id }: genreList) => {
   const [editState, seteditState] = useState<boolean>(false)
+  const [inputVal, setinputVal] = useState<string>('')
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const [deleteGenre] = useMutation(deleteGenreMutat, {
+    refetchQueries: [
+      {
+        query: getAllGenre,
+      },
+    ],
+  })
+
+  const [updateGenre] = useMutation(updateGenreMutat, {
+    refetchQueries: [
+      {
+        query: getAllGenre,
+      },
+    ],
+  })
+
+  const _handleUpdateBtn = () => {
+    updateGenre({
+      variables: {
+        updateGenreId: id,
+        name: inputVal,
+      },
+    })
+
+    seteditState(false)
+  }
+
+  const _handleDeleteBtn = () => {
+    deleteGenre({
+      variables: {
+        deleteGenreId: id?.toString(),
+      },
+    })
+  }
 
   useEffect(() => {
     if (editState) {
@@ -87,55 +130,68 @@ const GenreListInteractive = ({ name }: genreList) => {
   }, [editState])
 
   return (
-    <List className="mb-5 flex items-center justify-between">
-      {editState ? (
-        <input
-          ref={inputRef}
-          defaultValue={'Action'}
-          readOnly={!editState}
-          className={clsx(
-            'font-medium outline-none w-40',
-            editState && ['border border-black']
-          )}
-          autoFocus={true}
-        />
-      ) : (
-        <Link to="/genre/action">
-          <p className="font-medium outline-none w-40 capitalize">{name}</p>
-        </Link>
-      )}
+    <List className="mb-5">
+      <form
+        className="flex items-center justify-between"
+        onSubmit={(e) => {
+          e.preventDefault()
+          _handleUpdateBtn()
+        }}
+      >
+        {editState ? (
+          <input
+            onChange={(e) => {
+              setinputVal(e.target.value)
+            }}
+            ref={inputRef}
+            defaultValue={name}
+            readOnly={!editState}
+            className={clsx(
+              'font-medium outline-none w-40',
+              editState && ['border border-black']
+            )}
+            autoFocus={true}
+          />
+        ) : (
+          <Link to="/genre/action">
+            <p className="font-medium outline-none w-40 capitalize">{name}</p>
+          </Link>
+        )}
 
-      <div className="space-x-2 ml-2">
-        <Button
-          Btnsize="sm"
-          onClick={() => {
-            if (editState) {
-              //function save
-            } else {
-              //function edit
-            }
-            seteditState(!editState)
-          }}
-          className="text-xs"
-        >
-          {editState ? 'Save' : 'Edit'}
-        </Button>
-        <Button
-          Btnsize="sm"
-          variant="outline-primary"
-          className="text-xs"
-          onClick={() => {
-            if (editState) {
-              //function cancel
-              seteditState(false)
-            } else {
-              //funciton delete
-            }
-          }}
-        >
-          {editState ? 'Cancel' : 'Delete'}
-        </Button>
-      </div>
+        <div className="space-x-2 ml-2">
+          <Button
+            Btnsize="sm"
+            type="submit"
+            onClick={() => {
+              if (editState) {
+                _handleUpdateBtn()
+              } else {
+                //function edit
+              }
+              seteditState(!editState)
+            }}
+            className="text-xs"
+          >
+            {editState ? 'Save' : 'Edit'}
+          </Button>
+          <Button
+            Btnsize="sm"
+            variant="outline-primary"
+            className="text-xs"
+            type="button"
+            onClick={() => {
+              if (editState) {
+                //function cancel
+                seteditState(false)
+              } else {
+                _handleDeleteBtn()
+              }
+            }}
+          >
+            {editState ? 'Cancel' : 'Delete'}
+          </Button>
+        </div>
+      </form>
     </List>
   )
 }
