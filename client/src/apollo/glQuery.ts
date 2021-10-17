@@ -69,3 +69,23 @@ export const getGenreName = gql`
     }
   }
 `
+
+export const getBookSlug = gql`
+  query getBookSlug($slug: String) {
+    bookSlug(slug: $slug) {
+      id
+      title
+      slug
+      desc
+      genre {
+        id
+        name
+      }
+      author {
+        id
+        name
+        slug
+      }
+    }
+  }
+`

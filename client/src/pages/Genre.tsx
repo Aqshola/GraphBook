@@ -5,9 +5,10 @@ import InputBar from '../components/Input/InputBar'
 import { List, ListContainer } from '../components/List/List.'
 import clsx from 'clsx'
 import { genre } from '../types/ApiTypes'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { getAllGenre } from '../apollo/glQuery'
 import Loading from '../components/Utils/Loading'
+import { addGenreMutat } from '../apollo/glMutate'
 
 interface Response {
   genres: genre[]
@@ -15,20 +16,53 @@ interface Response {
 
 export default function Genre(): ReactElement {
   const { data, loading } = useQuery<Response>(getAllGenre)
+  const [inputVal, setinputVal] = useState<string>('')
+  const [
+    addGenre,
+    { data: MutateData, loading: MutateLoading, error: MutateError },
+  ] = useMutation(addGenreMutat, {
+    refetchQueries: [
+      {
+        query: getAllGenre,
+      },
+    ],
+  })
+
+  const _handleChange = (e: any) => {
+    setinputVal(e.target.value)
+  }
+
+  const _submitGenre = () => {
+    addGenre({
+      variables: {
+        name: inputVal,
+      },
+    })
+  }
   return (
     <>
       <h1 className="mt-2 text-2xl text-purple-600 font-semibold">
         Genre List
       </h1>
 
-      <div className="mt-10  flex p-2 md:p-0">
-        <InputBar placeholder="Add Genre" />
-        <Button Btnsize="sm" className="text-xs ml-4">
+      <form
+        className="mt-10  flex p-2 md:p-0"
+        onSubmit={(e) => {
+          e.preventDefault()
+          _submitGenre()
+        }}
+      >
+        <InputBar
+          placeholder="Add Genre"
+          onChange={_handleChange}
+          value={inputVal}
+        />
+        <Button Btnsize="sm" className="text-xs ml-4" type="submit">
           Add Genre
         </Button>
-      </div>
+      </form>
 
-      <Loading loading={loading} />
+      <Loading loading={loading || MutateLoading} />
       <ListContainer className="text-left mt-3 w-full p-2 md:p-0">
         {data?.genres.map((genre) => (
           <GenreListInteractive name={genre.name} key={genre.id} />
@@ -67,7 +101,7 @@ const GenreListInteractive = ({ name }: genreList) => {
         />
       ) : (
         <Link to="/genre/action">
-          <p className="font-medium outline-none w-40">Action</p>
+          <p className="font-medium outline-none w-40 capitalize">{name}</p>
         </Link>
       )}
 

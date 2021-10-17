@@ -13,6 +13,7 @@ import GenreDetail from './pages/GenreDetail'
 import AuthorDetail from './pages/AuthorDetail'
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import BookDetail from './pages/BookDetail'
 
 function App() {
   const client = new ApolloClient({
@@ -43,11 +44,8 @@ function App() {
               <Route exact path="/genre/:genre">
                 <GenreDetail />
               </Route>
-              <Route exact path="/book">
-                <h1>Book</h1>
-              </Route>
               <Route exact path="/book/:slug_book">
-                <h1>Book Detail</h1>
+                <BookDetail />
               </Route>
               <Route exact path="/input/book">
                 <InputBook />

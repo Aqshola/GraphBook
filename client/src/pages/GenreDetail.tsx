@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import React, { ReactElement } from 'react'
+import { ReactElement } from 'react'
 import { getGenreName } from '../apollo/glQuery'
 import CardBook from '../components/BookCard/BookCard'
 import Loading from '../components/Utils/Loading'
@@ -9,7 +9,7 @@ interface Response {
   genreName: genreDetail
 }
 export default function GenreDetail(): ReactElement {
-  const { loading, data, error } = useQuery<Response>(getGenreName, {
+  const { loading, data } = useQuery<Response>(getGenreName, {
     variables: {
       name: 'action',
     },

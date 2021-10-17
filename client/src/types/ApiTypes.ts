@@ -14,6 +14,7 @@ export type book = {
   genre: genre[]
   author?: author[]
   slug: string
+  desc: string
 }
 
 export type author = {
